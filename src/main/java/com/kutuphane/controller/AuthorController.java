@@ -18,15 +18,15 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping
+    @PostMapping("/createauthor")
     public ResponseEntity<String> createAuthor(@Valid @RequestBody Author author){
         authorService.createAuthor(author);
         String message="Author has created";
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        return ResponseEntity.ok(message);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateAuthor(@Valid @PathVariable("id") Long id, @RequestBody AuthorDTO authorDTO){
+    @PutMapping("updateauthor/{id}")
+    public ResponseEntity<String> updateAuthor( @PathVariable("id") Long id, @Valid @RequestBody AuthorDTO authorDTO){
         authorService.updateAuthor(id,authorDTO);
         String message="Author has updated successfully";
         return new ResponseEntity<>(message,HttpStatus.OK);
@@ -38,7 +38,7 @@ public class AuthorController {
         return ResponseEntity.ok(author);
     }
 
-    @DeleteMapping("/deleteauthor")
+    @DeleteMapping("/deleteauthor/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id){
         authorService.deleteById(id);
         String message= "Author has deleted successfully";

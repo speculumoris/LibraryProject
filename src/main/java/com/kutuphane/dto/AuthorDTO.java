@@ -12,13 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AuthorDTO {
 
-    private Long id;
     private String authorName;
     private String authorSurname;
     private String explanation;
 
     public AuthorDTO(Author author) {
-        this.id= author.getId();
         this.authorName=author.getAuthorName();
         this.authorSurname=author.getAuthorSurname();
         this.explanation=author.getExplanation();

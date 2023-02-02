@@ -21,19 +21,19 @@ public class AuthorService {
     }
 
     public void updateAuthor(Long id, AuthorDTO authorDTO) {
-        Author aut=findAutById(id);
+        Author author=findAutById(id);
 
-        Author author= new Author();
         author.setAuthorName(authorDTO.getAuthorName());
-        author.setId(authorDTO.getId());
         author.setAuthorSurname(authorDTO.getAuthorSurname());
         author.setExplanation(authorDTO.getExplanation());
+
+        authorRepository.save(author);
     }
 
 
     public Author findAutById(Long id) {
-        return authorRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundexception("There is no author in this id"));
+        return authorRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundexception("Student not found with id :" + id));
     }
 
     public void deleteById(Long id) {
