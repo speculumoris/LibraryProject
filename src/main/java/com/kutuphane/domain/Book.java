@@ -1,5 +1,6 @@
 package com.kutuphane.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,13 +35,17 @@ public class Book {
     @Column(nullable = false)
     private String serialNo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "authors_book")
-    private Author authorName;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="books_publisher")
+    @JoinColumn(name="author_id")
+    private Author author;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+
 
 
 
