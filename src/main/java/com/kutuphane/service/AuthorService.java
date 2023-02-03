@@ -2,7 +2,7 @@ package com.kutuphane.service;
 
 import com.kutuphane.domain.Author;
 import com.kutuphane.dto.AuthorDTO;
-import com.kutuphane.exception.ResourceAllreadyExistsException;
+import com.kutuphane.exception.ConflictException;
 import com.kutuphane.exception.ResourceNotFoundexception;
 import com.kutuphane.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class AuthorService {
     public void createAuthor(Author author) {
         boolean exists=authorRepository.existsById(author.getId());
         if(exists){
-            throw new ResourceAllreadyExistsException("There is an other author has this id ");
+            throw new ConflictException("There is an other author has this id ");
         }
         authorRepository.save(author);
     }

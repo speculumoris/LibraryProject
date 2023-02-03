@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -21,12 +20,27 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @NotNull(message = "each book has a name")
+    @NotBlank(message = "Book name cannot blank")
     private String bookName;
+
     private String subtitle;
+
     private String serialName;
 
-    @Col
+    @NotNull(message = "each book has a serialNo")
+    @NotBlank(message = "serialNo cannot blank")
+    @Column(nullable = false)
     private String serialNo;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "authors_book")
+    private Author authorName;
+
+    @ManyToOne
+    @JoinColumn(name="books_publisher")
+    private Publisher publisher;
 
 
 
