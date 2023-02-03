@@ -45,7 +45,7 @@ public class AuthorController {
         return ResponseEntity.ok(message);
     }
 
-    @GetMapping
+    @GetMapping("/getall")
     public ResponseEntity<List<Author>> getAll(){
        List<Author> allAuthor=authorService.getAll();
         return ResponseEntity.ok(allAuthor);
