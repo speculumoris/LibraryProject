@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,9 +29,12 @@ public class Publisher {
 
     private String explanation;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "publisher")
-    private List<Book> book;
+    private List<Book> books=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "publisher")
+    private Author author;
 
 
 
